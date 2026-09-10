@@ -1,0 +1,9 @@
+npm install --save-dev nodemon
+npm install dotenv
+npm install express mongoose 
+npm install bcryptjs
+
+npm install jsonwebtoken(jwt library)
+
+CORS(Cross-Origin Resource Sharing)
+npm install cors
