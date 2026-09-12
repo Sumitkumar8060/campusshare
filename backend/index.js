@@ -35,7 +35,6 @@ app.use("/api/notifications", notificationRoutes);
 
 // app.listen(PORT,()=>{
 //     console.log('server is running on http://localhost:${PORT}');
-
 // });
 
 module.exports = app;
