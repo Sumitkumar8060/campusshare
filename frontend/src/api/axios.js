@@ -1,12 +1,11 @@
 import axios from "axios";
 
-// const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-const baseURL = import.meta.env.VITE_API_URL;
-if (!baseURL) {
-  // Fails fast in the console instead of silently hitting localhost in prod
-  console.error("VITE_API_URL is not set. Set it in your Vercel project settings.");
-}
-
+const rawBaseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Strip any trailing slash(es) so we never end up with a double slash like
+// "https://backend.vercel.app//api/items" — double slashes get redirected by
+// Vercel's edge network, and browsers refuse to follow redirects during a
+// CORS preflight, which surfaces as an opaque "CORS error" in DevTools.
+const baseURL = rawBaseURL.replace(/\/+$/, "");
 
 export const api = axios.create({
   baseURL: `${baseURL}/api`,
