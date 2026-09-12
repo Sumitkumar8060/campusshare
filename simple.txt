@@ -7,3 +7,14 @@ npm install jsonwebtoken(jwt library)
 
 CORS(Cross-Origin Resource Sharing)
 npm install cors
+
+
+for frontend
+ npm create vite@latest frontend -- --template react
+ npm install
+ npm run dev
+
+
+npm install tailwindcss @tailwindcss/vite
+
+npm install react-router-dom
