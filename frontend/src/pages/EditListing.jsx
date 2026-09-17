@@ -103,6 +103,7 @@ export default function EditListing() {
       <Card>
         <CardContent className="p-6 sm:p-8">
           <ListingForm
+            mode="edit"
             defaultValues={defaultValues}
             onSubmit={(payload) => mutation.mutate(payload)}
             submitLabel="Save changes"

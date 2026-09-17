@@ -12,5 +12,18 @@ services:
     ports:
       - "5000:5000" 
     environment:
-      - MONGO_URI=mongodb+srv://badbreaking364_db_user:MMCXJo7pDTQ2w461@cluster0.plpv4ki.mongodb.net/campus
+      # - MONGO_URI=mongodb+srv://badbreaking364_db_user:MMCXJo7pDTQ2w461@cluster0.plpv4ki.mongodb.net/campus
+      - MONGO_URI=mongodb://mongodb:27017/campus
       - JWT_SECRET=kF6oZ9USt8ox70Y1sNJOPvPWdHMUGs0Xx2dSckEBgLc
+    depends_on:
+      - mongodb
+    
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

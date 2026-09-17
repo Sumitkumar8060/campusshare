@@ -1,6 +1,7 @@
 // controllers/itemController.js
 
 const Item = require("../models/Item");
+const imagekit = require("../config/imagekit");
 
 // @desc   Create a new item
 // @route  POST /api/items
@@ -9,18 +10,34 @@ const createItem = async (req, res) => {
     const {
       name, category, description, condition, listingType,
       price, rentPricePerDay, securityDeposit,
-      availableFrom, availableUntil, quantity, location, images,
+      availableFrom, availableUntil, quantity, location,
     } = req.body;
 
     if (!name || !category || !description || !condition || !listingType || !location) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    // Upload images to ImageKit
+    const imageUrls = [];
+
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        const result = await imagekit.upload({
+          file: file.buffer,
+          fileName: `${Date.now()}-${file.originalname}`,
+          folder: "/campusshare/listings",
+        });
+
+        imageUrls.push(result.url);
+      }
+    }
+
+
     const item = await Item.create({
       owner: req.user._id,
       name, category, description, condition, listingType,
       price, rentPricePerDay, securityDeposit,
-      availableFrom, availableUntil, quantity, location, images,
+      availableFrom, availableUntil, quantity, location,images: imageUrls,
     });
 
     res.status(201).json(item);

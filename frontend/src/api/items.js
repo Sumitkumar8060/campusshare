@@ -19,12 +19,22 @@ export function getItemById(id) {
 
 /**
  * POST /api/items (auth required)
- * body: { name, category, description, condition, listingType, price,
- *         rentPricePerDay, securityDeposit, availableFrom, availableUntil,
- *         quantity, location, images }
+ * Accepts a FormData instance (name, category, description, condition,
+ * listingType, price, rentPricePerDay, securityDeposit, availableFrom,
+ * availableUntil, quantity, location, and up to 5 "images" file entries —
+ * matches the backend's upload.array("images", 5)).
+ *
+ * The `api` axios instance sets a default "Content-Type: application/json"
+ * header. That default would otherwise stick on this request too, which
+ * breaks multipart uploads (the browser needs to set its own
+ * "multipart/form-data; boundary=..." header). Explicitly clearing it here
+ * lets axios/the browser generate the correct multipart header and boundary.
  */
 export function createItem(payload) {
-  return api.post("/items", payload).then((res) => res.data);
+  const isFormData = typeof FormData !== "undefined" && payload instanceof FormData;
+  return api
+    .post("/items", payload, isFormData ? { headers: { "Content-Type": undefined } } : undefined)
+    .then((res) => res.data);
 }
 
 /** PUT /api/items/:id (auth required, owner only) */

@@ -29,6 +29,7 @@ export default function CreateListing() {
       <Card>
         <CardContent className="p-6 sm:p-8">
           <ListingForm
+            mode="create"
             onSubmit={(payload) => mutation.mutate(payload)}
             submitLabel="Publish listing"
             loading={mutation.isPending}

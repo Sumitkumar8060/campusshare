@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const rawBaseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// const rawBaseURL =  "http://localhost:5000";
+
 // Strip any trailing slash(es) so we never end up with a double slash like
 // "https://backend.vercel.app//api/items" — double slashes get redirected by
 // Vercel's edge network, and browsers refuse to follow redirects during a
