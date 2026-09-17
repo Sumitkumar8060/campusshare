@@ -18,3 +18,16 @@ for frontend
 npm install tailwindcss @tailwindcss/vite
 
 npm install react-router-dom
+
+
+docker run -d \
+  --name backend \
+  --network app-network \
+  backend-image
+
+
+  docker run -d \
+  --name frontend \
+  --network app-network \
+  -p 3000:80 \
+  frontend-image

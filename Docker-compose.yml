@@ -1,0 +1,16 @@
+services:
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend  
+    ports:
+      - "5000:5000" 
+    environment:
+      - MONGO_URI=mongodb+srv://badbreaking364_db_user:MMCXJo7pDTQ2w461@cluster0.plpv4ki.mongodb.net/campus
+      - JWT_SECRET=kF6oZ9USt8ox70Y1sNJOPvPWdHMUGs0Xx2dSckEBgLc

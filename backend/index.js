@@ -18,7 +18,7 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
-// const PORT = process.env.PORT ||5000;
+const PORT = process.env.PORT ||5000;
 
 
 
@@ -33,8 +33,8 @@ app.use("/api/requests", requestRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 
-// app.listen(PORT,()=>{
-//     console.log('server is running on http://localhost:${PORT}');
-// });
+app.listen(PORT,()=>{
+    console.log('server is running on http://localhost:${PORT}');
+});
 
-module.exports = app;
+// module.exports = app;
